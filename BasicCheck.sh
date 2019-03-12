@@ -13,16 +13,16 @@ cd $fileName
 make &> /dev/null
 
 #Tracking and testing
-comp= "PASS" 
-memory_leak= "PASS"
-thread_race= "PASS"
-Answer="$Comp$Memoryleake$Threadrace"
+compilation="PASS" 
+memoryLeak="PASS"
+threadRace="PASS"
+Answer="$Comp$MemoryLeake$ThreadRace"
 
 if [[$? -gt 0]]; then
      echo "compilation  memory leaks  thread race"
-     comp= "fail"
-     memory_leak= "fail"
-     thread_race= "fail"
+     compilation="FAIL"
+     memoryLeak="FAIL"
+     threadRace="FAIL"
      echo " fail           fail           fail  "
      exit 7
  else 
@@ -36,7 +36,7 @@ if [[$? -gt 0]]; then
          Memory=0
     fi
     
-    valgrind --tool=helgrind --error-exitcode=1 
+    valgrind --tool=helgrind --error-exitcode=1 ./$project $@ >/dev/null 2>&1 
     if [[ $? -gt 0 ]]; then
            Thread=1
            else
@@ -53,22 +53,22 @@ if [[$? -gt 0]]; then
     
     
     if [[ $Answer -eq "001"]]; then
-          thread_race= "FAIL"
+          threadRace="FAIL"
           echo "compilation  memory leaks  thread race"
           echo "   pass          pass           fail
           exit 1
     fi
     
     if [[ $Answer -eq "010"]]; then
-          memory_leak= "FAIL"
+          memoryLeak="FAIL"
           echo "compilation  memory leaks  thread race"
           echo "   pass          fail      pass   "
           exit 2
     fi
     
     if [[ $Answer -eq "011" ]]; then
-           memory_leak= "FAIL"
-           thread_race= "FAIL"
+           memoryLeak="FAIL"
+           threadRace="FAIL"
           echo "compilation  memory leaks  thread race"
           echo "   pass          fail           fail  "
           exit 3

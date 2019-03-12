@@ -73,3 +73,4 @@ if [ $? -gt 0 ]; then
           echo "   pass          fail         fail    "
           exit 3
     fi
+    fi

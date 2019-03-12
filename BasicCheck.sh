@@ -47,7 +47,7 @@ if [ $? -gt 0 ]; then
     if [ $Answer -eq "000" ]; then
         
           echo "compilation  memory leaks  thread race"
-          echo "   pass          pass           pass   "
+          echo "   pass          pass           pass  "
           exit 0
     fi
     
@@ -55,7 +55,7 @@ if [ $? -gt 0 ]; then
     if [ $Answer -eq "001" ]; then
           threadRace="FAIL"
           echo "compilation  memory leaks  thread race"
-          echo "   pass          pass           fail
+          echo "   pass          pass           fail  "
           exit 1
     fi
     
@@ -70,6 +70,8 @@ if [ $? -gt 0 ]; then
            memoryLeak="FAIL"
            threadRace="FAIL"
           echo "compilation  memory leaks  thread race"
-          echo "   pass          fail         fail  "
+          echo "   pass          fail         fail    "
           exit 3
     fi
+    
+echo " THE END "

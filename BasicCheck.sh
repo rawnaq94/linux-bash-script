@@ -26,9 +26,9 @@ if [ $? -gt 0 ]; then
      echo " fail           fail           fail  "
      exit 7
  else 
-     
    comp=0
-   
+ fi
+ 
    valgrind --leak-check=full --error-exitcode=1 ./$project
             Memory=$?
 
@@ -76,5 +76,5 @@ if [ $? -gt 0 ]; then
           echo "   pass          fail         fail    "
           exit 3
     fi
-    fi
+
 

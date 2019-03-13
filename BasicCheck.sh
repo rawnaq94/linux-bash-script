@@ -77,4 +77,4 @@ if [ $? -gt 0 ]; then
           exit 3
     fi
     fi
-    exit 0
+

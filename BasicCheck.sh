@@ -28,7 +28,7 @@ if [ $? -gt 0 ]; then
      $Answer=111
      exit 7
  else
-    $Answer=000
+  
     comp=0
  fi
  

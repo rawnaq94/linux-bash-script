@@ -35,7 +35,7 @@ if [ $? -gt 0 ]; then
    if [ Memory -eq 0 ]; then
      echo " Memory "
      echo " PASS "
-     
+     $Answer=101
     fi
     
     valgrind --tool=helgrind --error-exitcode=1 ./$project ${variables}
@@ -43,9 +43,9 @@ if [ $? -gt 0 ]; then
     if [ Thread -eq 0 ]; then
              echo " Thread "
              echo " PASS "
-           
+        $Answer=110   
     fi
-    
+  
    
     if [ $Answer -eq "000" ]; then
         

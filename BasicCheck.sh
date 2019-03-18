@@ -25,6 +25,7 @@ if [ $? -gt 0 ]; then
      $memoryLeak="FAIL"
      $threadRace="FAIL"
      echo " fail           fail           fail  "
+     $Answer=111
      exit 7
  else
     comp=0
@@ -34,6 +35,7 @@ if [ $? -gt 0 ]; then
             Memory=$?
 
    if [ Memory -eq 0 ]; then
+     $Answer=101
      echo " Memory "
      echo " PASS "
     fi
@@ -41,6 +43,7 @@ if [ $? -gt 0 ]; then
     valgrind --tool=helgrind --error-exitcode=1 ./$project ${variables}
            Thread=&?
     if [ Thread -eq 0 ]; then
+             $Answer=110
              echo " Thread "
              echo " PASS "
       

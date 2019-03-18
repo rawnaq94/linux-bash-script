@@ -29,7 +29,7 @@ if [ $? -gt 0 ]; then
    comp=0
  fi
  
-   valgrind --leak-check=full --error-exitcode=1 ./$project
+   valgrind --leak-check=full --error-exitcode=1 ./$project ${variables}
             Memory=$?
 
    if [ Memory -eq 0 ]; then
@@ -38,7 +38,7 @@ if [ $? -gt 0 ]; then
      
     fi
     
-    valgrind --tool=helgrind --error-exitcode=1 ./$project
+    valgrind --tool=helgrind --error-exitcode=1 ./$project ${variables}
            Thread=&?
     if [ Thread -eq 0 ]; then
              echo " Thread "

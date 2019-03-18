@@ -17,7 +17,7 @@ compilation="PASS"
 memoryLeak="PASS"
 threadRace="PASS"
 Answer="$Comp$MemoryLeake$ThreadRace"
-$Answer=111
+$Answer=000
 
 if [ $? -gt 0 ]; then
      echo "compilation  memory leaks  thread race"
@@ -25,9 +25,11 @@ if [ $? -gt 0 ]; then
      $memoryLeak="FAIL"
      $threadRace="FAIL"
      echo " fail           fail           fail  "
+     $Answer=111
      exit 7
- else 
-   comp=0
+ else
+    $Answer=000
+    comp=0
  fi
  
    valgrind --leak-check=full --error-exitcode=1 ./$project ${variables}

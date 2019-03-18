@@ -17,6 +17,7 @@ compilation="PASS"
 memoryLeak="PASS"
 threadRace="PASS"
 Answer="$Comp$MemoryLeake$ThreadRace"
+$Answer=111
 
 if [ $? -gt 0 ]; then
      echo "compilation  memory leaks  thread race"

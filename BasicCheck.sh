@@ -25,7 +25,6 @@ if [ $? -gt 0 ]; then
      $memoryLeak="FAIL"
      $threadRace="FAIL"
      echo " fail           fail           fail  "
-     $Answer=111
      exit 7
  else
   

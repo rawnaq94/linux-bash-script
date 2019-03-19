@@ -57,7 +57,7 @@ if [ $? -gt 0 ]; then
     fi
     
     if [ $Answer -eq '010' ]; then
-          $memoryLeak="FAIL"
+       
           echo "compilation  memory leaks  thread race"
           echo "   pass          fail          pass   "
           exit 2

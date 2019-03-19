@@ -49,21 +49,21 @@ if [ $? -gt 0 ]; then
     fi
     
     
-    if [ $Answer -eq "001" ]; then
+    if [ $Answer -eq '001' ]; then
          
           echo "compilation  memory leaks  thread race"
           echo "   pass          pass           fail  "
           exit 1
     fi
     
-    if [ $Answer -eq "010" ]; then
+    if [ $Answer -eq '010' ]; then
           $memoryLeak="FAIL"
           echo "compilation  memory leaks  thread race"
           echo "   pass          fail          pass   "
           exit 2
     fi
     
-    if [ $Answer -eq "011" ]; then
+    if [ $Answer -eq '011' ]; then
            
           echo "compilation  memory leaks  thread race"
           echo "   pass          fail         fail    "

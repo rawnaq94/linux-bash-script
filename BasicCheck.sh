@@ -15,12 +15,13 @@ make &> /dev/null
 if [[ $? -gt 0 ]]; then
      echo "compilation  memory leaks  thread race"
      echo " fail           fail           fail  "
+     Comp=1
      exit 7
  else
-    comp=0
+    Comp=0
 
  
-   valgrind --leak-check=full --error-exitcode=1 ./$project ${variables}  &> /dev/null
+   valgrind --tool=memcheck --leak-check=full --error-exitcode=1 ./$project $variables  &> /dev/null
       if [[ $? -gt 0 ]]; then
           Memory=1
           else
@@ -28,7 +29,7 @@ if [[ $? -gt 0 ]]; then
        fi
 
     
-    valgrind --tool=helgrind --error-exitcode=1 ./$project ${variables}  &> /dev/null
+    valgrind --tool=helgrind --error-exitcode=1 ./$project $variables  &> /dev/null
     if [[ $? -gt 0 ]]; then
              Thread=1
              else
@@ -38,7 +39,7 @@ if [[ $? -gt 0 ]]; then
   
   fi
   
-  Answer="$Comp$MemoryLeake$ThreadRace"
+  Answer=$Comp$Memory$Thread
 
    
     if [[ $Answer -eq '000' ]]; then

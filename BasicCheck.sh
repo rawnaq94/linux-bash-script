@@ -20,7 +20,7 @@ if [ $? -gt 0 ]; then
     comp=0
 
  
-   valgrind --leak-check=full --error-exitcode=1 ./$project $variables  &> /dev/null
+   valgrind --leak-check=full --error-exitcode=1 ./$project ${variables}  &> /dev/null
       if [ $? -gt 0 ]; then
           Memory=1
           else
@@ -28,7 +28,7 @@ if [ $? -gt 0 ]; then
        fi
 
     
-    valgrind --tool=helgrind --error-exitcode=1 ./$project $variables  &> /dev/null
+    valgrind --tool=helgrind --error-exitcode=1 ./$project ${variables}  &> /dev/null
     if [ $? -gt 0 ]; then
              Thread=1
              else

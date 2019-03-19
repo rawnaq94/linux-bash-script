@@ -12,7 +12,7 @@ cd $fileName
 make &> /dev/null
 
 
-if [ $? -gt 0 ]; then
+if [[ $? -gt 0 ]]; then
      echo "compilation  memory leaks  thread race"
      echo " fail           fail           fail  "
      exit 7
@@ -21,7 +21,7 @@ if [ $? -gt 0 ]; then
 
  
    valgrind --leak-check=full --error-exitcode=1 ./$project ${variables}  &> /dev/null
-      if [ $? -gt 0 ]; then
+      if [[ $? -gt 0 ]]; then
           Memory=1
           else
           Memory=0
@@ -29,7 +29,7 @@ if [ $? -gt 0 ]; then
 
     
     valgrind --tool=helgrind --error-exitcode=1 ./$project ${variables}  &> /dev/null
-    if [ $? -gt 0 ]; then
+    if [[ $? -gt 0 ]]; then
              Thread=1
              else
              Thread=0
@@ -41,7 +41,7 @@ if [ $? -gt 0 ]; then
   Answer="$Comp$MemoryLeake$ThreadRace"
 
    
-    if [ $Answer -eq "000" ]; then
+    if [[ $Answer -eq '000' ]]; then
         
           echo "compilation  memory leaks  thread race"
           echo "   pass          pass           pass  "
@@ -49,25 +49,25 @@ if [ $? -gt 0 ]; then
     fi
     
     
-    if [ $Answer -eq '001' ]; then
+    if [[ $Answer -eq '001' ]]; then
          
           echo "compilation  memory leaks  thread race"
           echo "   pass          pass           fail  "
           exit 1
     fi
     
-    if [ $Answer -eq '010' ]; then
+    if [[ $Answer -eq '010' ]]; then
        
           echo "compilation  memory leaks  thread race"
           echo "   pass          fail          pass   "
           exit 2
     fi
     
-    if [ $Answer -eq '011' ]; then
+    if [[ $Answer -eq '011' ]]; then
            
           echo "compilation  memory leaks  thread race"
           echo "   pass          fail         fail    "
           exit 3
     fi
 
-
+exit 0

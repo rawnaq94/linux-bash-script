@@ -8,50 +8,40 @@ variables=${@:3}
 
 #Login to file
 cd $fileName
-
 # Throw the action
 make &> /dev/null
 
-#Tracking and testing
-compilation="PASS" 
-memoryLeak="PASS"
-threadRace="PASS"
-Answer="$Comp$MemoryLeake$ThreadRace"
-$Answer=000
 
 if [ $? -gt 0 ]; then
      echo "compilation  memory leaks  thread race"
-     $compilation="FAIL"
-     $memoryLeak="FAIL"
-     $threadRace="FAIL"
      echo " fail           fail           fail  "
-     $Answer=111
      exit 7
  else
     comp=0
- fi
- 
-   valgrind --leak-check=full --error-exitcode=1 ./$project ${variables}
-            Memory=$?
 
-   if [ Memory -eq 0 ]; then
-     $Answer=101
-     echo " Memory "
-     echo " PASS "
-    fi
+ 
+   valgrind --leak-check=full --error-exitcode=1 ./$project $variables
+          Memory=$?
+      if [ $? -gt 0 ]; then
+          Memory=1
+          else
+          Memory=0
+       fi
+
     
-    valgrind --tool=helgrind --error-exitcode=1 ./$project ${variables}
-           Thread=&?
-    if [ Thread -eq 0 ]; then
-             $Answer=110
-             echo " Thread "
-             echo " PASS "
+    valgrind --tool=helgrind --error-exitcode=1 ./$project $variables
+           Thread=$?
+    if [ $? -gt 0 ]; then
+             Thread=1
+             else
+             Thread=0
       
     fi
   
+  fi
   
-  
-  
+  Answer="$Comp$MemoryLeake$ThreadRace"
+
    
     if [ $Answer -eq "000" ]; then
         
@@ -62,7 +52,7 @@ if [ $? -gt 0 ]; then
     
     
     if [ $Answer -eq "001" ]; then
-          $threadRace="FAIL"
+         
           echo "compilation  memory leaks  thread race"
           echo "   pass          pass           fail  "
           exit 1
@@ -76,8 +66,7 @@ if [ $? -gt 0 ]; then
     fi
     
     if [ $Answer -eq "011" ]; then
-           $memoryLeak="FAIL"
-           $threadRace="FAIL"
+           
           echo "compilation  memory leaks  thread race"
           echo "   pass          fail         fail    "
           exit 3

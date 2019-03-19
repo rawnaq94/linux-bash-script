@@ -21,7 +21,6 @@ if [ $? -gt 0 ]; then
 
  
    valgrind --leak-check=full --error-exitcode=1 ./$project $variables
-          Memory=$?
       if [ $? -gt 0 ]; then
           Memory=1
           else
@@ -30,7 +29,6 @@ if [ $? -gt 0 ]; then
 
     
     valgrind --tool=helgrind --error-exitcode=1 ./$project $variables
-           Thread=$?
     if [ $? -gt 0 ]; then
              Thread=1
              else
